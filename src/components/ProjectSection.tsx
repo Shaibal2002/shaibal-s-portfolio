@@ -1,20 +1,29 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import CloudSVG from "./CloudSVG";
 
 const ProjectSection = () => {
   const ref = useRef(null);
+  const containerRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  return (
-    <section id="project" className="py-32 px-6 bg-secondary/30 relative overflow-hidden" ref={ref}>
-      {/* Decorative cloud */}
-      <div className="absolute top-20 right-0 opacity-30 animate-drift">
-        <CloudSVG variant="medium" />
-      </div>
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
 
-      <div className="max-w-4xl mx-auto relative z-10">
+  const y = useTransform(scrollYProgress, [0, 1], [80, -40]);
+  const cloudY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
+  return (
+    <section id="project" className="py-32 px-6 bg-secondary/30 relative overflow-hidden" ref={containerRef}>
+      {/* Decorative cloud with parallax */}
+      <motion.div className="absolute top-20 right-0 opacity-30" style={{ y: cloudY }}>
+        <CloudSVG variant="medium" />
+      </motion.div>
+
+      <motion.div className="max-w-4xl mx-auto relative z-10" ref={ref} style={{ y }}>
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -94,7 +103,7 @@ const ProjectSection = () => {
               "Web Application Architecture",
               "RDBMS & OOPS",
               "Cloud-based AI tools",
-            ].map((interest, index) => (
+            ].map((interest) => (
               <span
                 key={interest}
                 className="px-4 py-2 bg-background/50 text-foreground/70 text-sm font-body rounded-full border border-border/50"
@@ -104,7 +113,7 @@ const ProjectSection = () => {
             ))}
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };

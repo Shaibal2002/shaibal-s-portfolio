@@ -1,14 +1,26 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const AboutSection = () => {
   const ref = useRef(null);
+  const containerRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [100, -50]);
+
   return (
-    <section id="about" className="py-32 px-6" ref={ref}>
-      <div className="max-w-4xl mx-auto">
+    <section id="about" className="py-32 px-6 relative overflow-hidden" ref={containerRef}>
+      <motion.div
+        className="max-w-4xl mx-auto"
+        ref={ref}
+        style={{ y }}
+      >
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -75,7 +87,7 @@ const AboutSection = () => {
             </div>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };
