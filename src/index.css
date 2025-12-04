@@ -6,78 +6,78 @@
 
 @layer base {
   :root {
-    /* Deep Sage Green Palette - Inspired by the reference */
-    --background: 95 35% 22%;
-    --foreground: 85 30% 90%;
+    /* Deep Forest Green Palette - Matching reference image */
+    --background: 100 32% 20%;
+    --foreground: 85 25% 88%;
 
-    --card: 95 30% 18%;
-    --card-foreground: 85 30% 90%;
+    --card: 100 30% 16%;
+    --card-foreground: 85 25% 88%;
 
-    --popover: 95 30% 18%;
-    --popover-foreground: 85 30% 90%;
+    --popover: 100 30% 16%;
+    --popover-foreground: 85 25% 88%;
 
-    --primary: 95 25% 70%;
-    --primary-foreground: 95 35% 15%;
+    --primary: 100 20% 72%;
+    --primary-foreground: 100 32% 12%;
 
-    --secondary: 95 20% 30%;
-    --secondary-foreground: 85 30% 90%;
+    --secondary: 100 25% 25%;
+    --secondary-foreground: 85 25% 88%;
 
-    --muted: 95 20% 28%;
-    --muted-foreground: 85 20% 70%;
+    --muted: 100 22% 24%;
+    --muted-foreground: 85 18% 65%;
 
-    --accent: 95 30% 75%;
-    --accent-foreground: 95 35% 15%;
+    --accent: 100 25% 75%;
+    --accent-foreground: 100 32% 12%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 95 20% 35%;
-    --input: 95 20% 35%;
-    --ring: 95 25% 70%;
+    --border: 100 20% 30%;
+    --input: 100 20% 30%;
+    --ring: 100 20% 72%;
 
     --radius: 0.5rem;
 
-    /* Custom Design Tokens */
-    --sage-dark: 95 35% 22%;
-    --sage-medium: 95 30% 30%;
-    --sage-light: 95 25% 70%;
-    --cream: 45 30% 92%;
-    --cream-muted: 45 20% 85%;
-    --mint: 140 25% 75%;
+    /* Custom Design Tokens - Deep Forest Green */
+    --forest-dark: 100 32% 20%;
+    --forest-medium: 100 28% 28%;
+    --forest-light: 100 20% 72%;
+    --cream: 45 35% 92%;
+    --cream-muted: 45 25% 85%;
+    --mint: 130 20% 78%;
 
     /* Typography */
     --font-display: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(180deg, hsl(95 35% 22%) 0%, hsl(95 30% 18%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(95 30% 25% / 0.5) 0%, hsl(95 25% 20% / 0.3) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(100 32% 20%) 0%, hsl(100 30% 16%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(100 28% 24% / 0.6) 0%, hsl(100 25% 18% / 0.3) 100%);
 
     /* Shadows */
-    --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.15);
-    --shadow-glow: 0 0 40px hsl(95 25% 70% / 0.2);
+    --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.2);
+    --shadow-glow: 0 0 40px hsl(100 20% 72% / 0.15);
   }
 
   .dark {
-    --background: 95 35% 22%;
-    --foreground: 85 30% 90%;
-    --card: 95 30% 18%;
-    --card-foreground: 85 30% 90%;
-    --popover: 95 30% 18%;
-    --popover-foreground: 85 30% 90%;
-    --primary: 95 25% 70%;
-    --primary-foreground: 95 35% 15%;
-    --secondary: 95 20% 30%;
-    --secondary-foreground: 85 30% 90%;
-    --muted: 95 20% 28%;
-    --muted-foreground: 85 20% 70%;
-    --accent: 95 30% 75%;
-    --accent-foreground: 95 35% 15%;
+    --background: 100 32% 20%;
+    --foreground: 85 25% 88%;
+    --card: 100 30% 16%;
+    --card-foreground: 85 25% 88%;
+    --popover: 100 30% 16%;
+    --popover-foreground: 85 25% 88%;
+    --primary: 100 20% 72%;
+    --primary-foreground: 100 32% 12%;
+    --secondary: 100 25% 25%;
+    --secondary-foreground: 85 25% 88%;
+    --muted: 100 22% 24%;
+    --muted-foreground: 85 18% 65%;
+    --accent: 100 25% 75%;
+    --accent-foreground: 100 32% 12%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 95 20% 35%;
-    --input: 95 20% 35%;
-    --ring: 95 25% 70%;
+    --border: 100 20% 30%;
+    --input: 100 20% 30%;
+    --ring: 100 20% 72%;
   }
 }
 
@@ -93,6 +93,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -113,16 +114,16 @@
     color: hsl(var(--cream));
   }
 
-  .text-sage-light {
-    color: hsl(var(--sage-light));
+  .text-forest-light {
+    color: hsl(var(--forest-light));
   }
 
-  .bg-sage-dark {
-    background-color: hsl(var(--sage-dark));
+  .bg-forest-dark {
+    background-color: hsl(var(--forest-dark));
   }
 
-  .bg-sage-medium {
-    background-color: hsl(var(--sage-medium));
+  .bg-forest-medium {
+    background-color: hsl(var(--forest-medium));
   }
 
   .gradient-hero {
@@ -194,7 +195,7 @@
     left: 0;
     width: 100%;
     height: 1px;
-    background: hsl(var(--sage-light));
+    background: hsl(var(--forest-light));
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.3s ease;
@@ -216,6 +217,11 @@
 
   .nav-pill.active {
     @apply bg-foreground text-background;
+  }
+
+  /* Parallax section styling */
+  .parallax-section {
+    will-change: transform;
   }
 }
 

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
@@ -7,9 +7,19 @@ import CloudSVG from "./CloudSVG";
 
 const ContactSection = () => {
   const ref = useRef(null);
+  const containerRef = useRef(null);
   const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [60, -30]);
+  const cloudY1 = useTransform(scrollYProgress, [0, 1], [50, -80]);
+  const cloudY2 = useTransform(scrollYProgress, [0, 1], [30, -60]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,16 +53,16 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-32 px-6 relative overflow-hidden" ref={ref}>
-      {/* Decorative clouds */}
-      <div className="absolute bottom-0 left-0 animate-float-slow opacity-40">
+    <section id="contact" className="py-32 px-6 relative overflow-hidden" ref={containerRef}>
+      {/* Decorative clouds with parallax */}
+      <motion.div className="absolute bottom-0 left-0 opacity-40" style={{ y: cloudY1 }}>
         <CloudSVG variant="large" />
-      </div>
-      <div className="absolute bottom-10 right-0 animate-float opacity-30" style={{ animationDelay: "2s" }}>
+      </motion.div>
+      <motion.div className="absolute bottom-10 right-0 opacity-30" style={{ y: cloudY2 }}>
         <CloudSVG variant="medium" flip />
-      </div>
+      </motion.div>
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <motion.div className="max-w-4xl mx-auto relative z-10" ref={ref} style={{ y }}>
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -179,7 +189,7 @@ const ContactSection = () => {
             </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
